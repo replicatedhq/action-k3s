@@ -4,13 +4,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-#    - uses: ./action.yml
-#      id: k3s
-#      with:
-#        version: 'latest'
-    - uses: replicatedhq/actions-k3s@${{github.ref_name}}
-      id: k3s
-      with:
-        version: 'latest'
-    - run: |
-        kubectl get nodes
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: ./action.yml
+        with:
+          version: 'latest'
+  #    - uses: replicatedhq/actions-k3s@${{github.ref_name}}
+  #      id: k3s
+  #      with:
+  #        version: 'latest'
+      - run: |
+          kubectl get nodes

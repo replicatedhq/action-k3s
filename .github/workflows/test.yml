@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: action.yml
+    - uses: ./action.yml
       id: k3s
       with:
         version: 'latest'

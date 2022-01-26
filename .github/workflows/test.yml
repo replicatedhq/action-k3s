@@ -7,7 +7,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup
-        uses: /
+        uses: ./
         with:
           version: 'latest'
   #    - uses: replicatedhq/actions-k3s@${{github.ref_name}}

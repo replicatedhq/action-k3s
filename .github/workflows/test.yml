@@ -1,18 +1,16 @@
 name: k3s Testing
-on:
-  push:
-    branches:
-      - 'fix/**'
-      - 'master'
-      - 'main'
+on: pull_request
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: debianmaster/actions-k3s@v1.0.4
+    - uses: .
       id: k3s
       with:
         version: 'latest'
+#    - uses: replicatedhq/actions-k3s@v1.0.4
+#      id: k3s
+#      with:
+#        version: 'latest'
     - run: |
         kubectl get nodes
-

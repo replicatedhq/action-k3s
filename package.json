@@ -19,10 +19,8 @@
   },
   "homepage": "https://github.com/debianmaster/actions-k3s#readme",
   "dependencies": {
-    "node-fetch": "latest",
     "@actions/core": "latest",
     "@actions/exec": "latest",
-    "@actions/github": "latest",
-    "execa": "latest"
+    "@vercel/ncc": "^0.33.3"
   }
 }

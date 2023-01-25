@@ -6,7 +6,7 @@ inputs:
     required: true
   egress-fix:
     description: Disable the k3s egress selector
-    required: true
+    required: false
   ports:
     description: Comma delimited list of host_port:container_port values (example "80:80,8080:8080")
     required: false

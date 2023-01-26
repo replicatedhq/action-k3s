@@ -6,6 +6,7 @@ This is helpful for testing applications /  operators on top of kubernetes clust
 ## Inputs
 * version of k3s  
 > refer to table at the end of this README
+* egress-fix whether to disable the k3s egress selector (bug on v1.22)
 * ports
 
 ## Outputs
@@ -17,6 +18,7 @@ This is helpful for testing applications /  operators on top of kubernetes clust
   id: k3s
   with:
     version: 'latest'
+    egress-fix: false
 - run: |
     kubectl get nodes
     kubectl get pods -A

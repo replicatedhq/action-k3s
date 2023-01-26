@@ -7,7 +7,7 @@ async function run() {
   try {
     const version = core.getInput('version');
     const ports = core.getInput('ports');
-    const egress_fix = core.getInput('egress-fix');
+    const extra_args = core.getInput('arguments');
     const nodeName = 'primary-node'
 
     const kubeconfigPath=`/tmp/output/kubeconfig-${version}.yaml`;
@@ -20,7 +20,12 @@ async function run() {
       }
     }
 
-    const egress_options = egress_fix ? "--egress-selector-mode disabled" : "";
+    const extra_opts = [];
+    for (const token of extra_args.split(' ')) {
+      if (token) {
+        extra_opts.push(token)
+      }
+    }
 
     await exec.exec('docker', ["run","-d","--privileged",`--name=k3s-${version}`,
       "-e",`K3S_KUBECONFIG_OUTPUT=${kubeconfigPath}`,
@@ -29,7 +34,7 @@ async function run() {
       "-v","/tmp/output:/tmp/output",
       "-p6443:6443",
       ...portPairs,
-      `rancher/k3s:${version}`,"server", `${egress_options}`]);
+      `rancher/k3s:${version}`,"server", ...extra_opts]);
 
     core.exportVariable('KUBECONFIG', kubeconfigPath);
     core.setOutput("kubeconfig", kubeconfigPath);

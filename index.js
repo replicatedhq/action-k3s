@@ -20,7 +20,7 @@ async function run() {
       }
     }
 
-    const egress_options = egress_fix ? "--egress-selector-mode none" : "";
+    const egress_options = egress_fix ? "--egress-selector-mode disabled" : "";
 
     await exec.exec('docker', ["run","-d","--privileged",`--name=k3s-${version}`,
       "-e",`K3S_KUBECONFIG_OUTPUT=${kubeconfigPath}`,

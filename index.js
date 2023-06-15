@@ -45,6 +45,11 @@ async function run() {
     }
 
     await exec.exec(`kubectl wait --timeout=60s --for=condition=Ready node/${nodeName}`);
+
+    while (await exec.exec(`kubectl get sa/default -n default`, null, { ignoreReturnCode: true })) {
+      console.log('Waiting for default service account to be ready...');
+      await wait(3000);
+    }
   } catch (error) {
     core.setFailed(error.message);
   }
